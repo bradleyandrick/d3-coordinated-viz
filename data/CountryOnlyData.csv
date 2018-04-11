@@ -1,4 +1,4 @@
-id,NAME,POP_EST,POP_RANK,POP_YEAR,GDP_YEAR,ECONOMY,INCOME_GRP,TPP_2016,TPC_2016,OPP_2016,OPC_2016,NGP_2016,NGC_2016,CLP_2016,CLC_2016,EP_2016,EC_2016,SREP_2016,CO2E_2016,i_code
+id,NAME,POP_EST,POP_RANK,POP_YEAR,GDP_YEAR,ECONOMY,INCOME_GRP,Total Primary Production,Total Primary Consumption,Oil Products Production,Oil Products Consumption,Natural Gas Production,Natural Gas Consumption,Coal Production,Coal Consumption,Electricity Production,Electricity Consumption,SREP_2016,CO2E_2016,i_code
 1,United Arab Emirates,6072475,13,2017,2016,Developing region,High income: nonOECD,217,78,36,18,59,74,0,2,132,114,0.23,195,wc-20161
 2,Argentina,44293293,15,2017,2016,Emerging region: G20,Upper middle income,78,90,33,34,43,56,0,2,156,131,26.14,205,wc-20162
 3,Australia,23232413,15,2017,2016,Developed region: nonG7,High income: OECD,384,117,26,46,71,35,509,114,257,229,16.86,358,wc-20163
