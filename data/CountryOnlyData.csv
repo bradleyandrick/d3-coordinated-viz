@@ -1,0 +1,45 @@
+id,NAME,POP_EST,POP_RANK,POP_YEAR,GDP_YEAR,ECONOMY,INCOME_GRP,TPP_2016,TPC_2016,OPP_2016,OPC_2016,NGP_2016,NGC_2016,CLP_2016,CLC_2016,EP_2016,EC_2016,SREP_2016,CO2E_2016,i_code
+1,United Arab Emirates,6072475,13,2017,2016,Developing region,High income: nonOECD,217,78,36,18,59,74,0,2,132,114,0.23,195,wc-20161
+2,Argentina,44293293,15,2017,2016,Emerging region: G20,Upper middle income,78,90,33,34,43,56,0,2,156,131,26.14,205,wc-20162
+3,Australia,23232413,15,2017,2016,Developed region: nonG7,High income: OECD,384,117,26,46,71,35,509,114,257,229,16.86,358,wc-20163
+4,Belgium,11491346,14,2017,2016,Developed region: nonG7,High income: OECD,15,56,34,22,0,18,0,4,84,83,17.79,92,wc-20164
+5,Brazil,207353391,17,2017,2016,Emerging region: BRIC,Upper middle income,287,289,99,110,24,34,7,27,580,509,81.19,420,wc-20165
+6,Canada,35623680,15,2017,2016,Developed region: G7,High income: OECD,471,273,97,102,165,111,62,40,643,498,66.38,564,wc-20166
+7,Chile,17789267,14,2017,2016,Emerging region: G20,Upper middle income,12,38,10,15,1,5,3,12,77,70,39.08,88,wc-20167
+8,China,1379302771,18,2017,2016,Emerging region: BRIC,Upper middle income,2538,3123,539,520,137,203,3210,3546,6015,5219,25.75,8796,wc-20168
+9,Colombia,47698524,15,2017,2016,Developing region,Upper middle income,125,33,18,12,12,10,94,3,82,52,82.04,65,wc-20169
+10,Czechia,10674723,14,2017,2016,Developed region: nonG7,High income: OECD,27,40,6,8,0,8,46,46,83,61,13.03,96,wc-201610
+11,Germany,80594017,16,2017,2016,Developed region: G7,High income: OECD,118,311,103,98,8,91,177,226,653,533,30.05,744,wc-201611
+12,Algeria,40969443,15,2017,2016,Developing region,Upper middle income,154,55,38,19,97,42,0,0,78,60,0.27,142,wc-201612
+13,Egypt,97041072,16,2017,2016,Emerging region: G20,Lower middle income,70,80,23,31,44,53,0,2,190,152,10.21,188,wc-201613
+14,Spain,48958159,15,2017,2016,Developed region: nonG7,High income: OECD,35,121,65,48,0,29,2,24,275,240,40.08,250,wc-201614
+15,France,67106161,16,2017,2016,Developed region: G7,High income: OECD,129,243,58,69,0,44,0,13,553,448,18.13,306,wc-201615
+16,United Kingdom,64769452,16,2017,2016,Developed region: G7,High income: OECD,120,178,61,60,43,82,4,18,339,307,25.6,380,wc-201616
+17,Indonesia,260580739,17,2017,2016,Emerging region: MIKT,Lower middle income,437,218,48,68,75,47,459,100,249,216,10.89,470,wc-201617
+18,India,1281935911,18,2017,2016,Emerging region: BRIC,Lower middle income,586,884,248,203,31,55,708,922,1423,1065,14.95,2088,wc-201618
+19,Iran,82021564,16,2017,2016,Emerging region: G20,Upper middle income,355,248,90,80,190,188,1,3,290,250,7.17,610,wc-201619
+20,Italy,62137802,16,2017,2016,Developed region: G7,High income: OECD,34,152,72,54,6,71,0,17,288,293,37.27,332,wc-201620
+21,Japan,126451398,17,2017,2016,Developed region: G7,High income: OECD,38,437,162,167,3,127,0,191,1013,927,17.44,1096,wc-201621
+22,Kazakhstan,18556698,14,2017,2016,Developing region,Upper middle income,161,75,15,10,36,31,102,75,104,76,7.65,228,wc-201622
+23,South Korea,51181299,16,2017,2016,Emerging region: MIKT,High income: OECD,63,288,145,104,0,45,2,126,549,512,2.29,588,wc-201623
+24,Kuwait,2875422,12,2017,2016,Developing region,High income: nonOECD,181,37,46,17,17,21,0,0,71,53,0,96,wc-201624
+25,Mexico,124574795,17,2017,2016,Emerging region: MIKT,Upper middle income,192,182,58,81,40,70,15,22,310,268,14.74,435,wc-201625
+26,Malaysia,31381992,15,2017,2016,Developing region,Upper middle income,95,94,26,32,67,41,1,28,164,149,11.37,260,wc-201626
+27,Nigeria,190632261,17,2017,2016,Emerging region: G20,Lower middle income,249,137,2,11,40,16,0,0,30,24,17.59,63,wc-201627
+28,Netherlands,17084719,14,2017,2016,Developed region: nonG7,High income: OECD,43,74,62,24,48,42,0,16,115,107,13.46,174,wc-201628
+29,Norway,5320045,13,2017,2016,Developed region: nonG7,High income: OECD,209,30,13,9,120,6,1,1,150,121,97.87,38,wc-201629
+30,New Zealand,4510327,12,2017,2016,Developed region: nonG7,High income: OECD,16,21,6,7,5,5,3,3,44,39,83.99,33,wc-201630
+31,Poland,38476269,15,2017,2016,Developed region: nonG7,High income: OECD,67,98,27,25,6,19,131,124,165,141,15.45,292,wc-201631
+32,Portugal,10839514,14,2017,2016,Developed region: nonG7,High income: OECD,6,22,15,9,0,5,0,5,61,47,55.15,49,wc-201632
+33,Romania,21529967,15,2017,2016,Developed region: nonG7,Upper middle income,25,33,12,9,10,11,22,27,68,51,46.2,69,wc-201633
+34,Russia,142257519,17,2017,2016,Emerging region: BRIC,Upper middle income,1346,692,276,149,628,423,359,210,1088,887,17.41,1560,wc-201634
+35,Saudi Arabia,28571770,15,2017,2016,Developed region: nonG7,High income: nonOECD,685,223,173,112,90,90,0,0,327,296,0,555,wc-201635
+36,Sweden,9960487,13,2017,2016,Developed region: nonG7,High income: OECD,35,50,20,11,0,1,0,3,155,131,57.22,42,wc-201636
+37,Thailand,68414135,16,2017,2016,Emerging region: G20,Upper middle income,77,139,63,53,34,49,17,36,180,183,9.16,272,wc-201637
+38,Turkey,80845215,16,2017,2016,Emerging region: MIKT,Upper middle income,38,139,30,40,0,47,71,106,274,229,32.53,342,wc-201638
+39,Taiwan,23508428,15,2017,2016,Developed region: nonG7,High income: nonOECD,11,110,43,40,0,18,0,63,266,241,5.43,264,wc-201639
+40,Ukraine,44033874,15,2017,2016,Developing region,Lower middle income,61,91,1,11,20,31,36,55,164,128,6.54,189,wc-201640
+41,United States of America,326625791,17,2017,2016,Developed region: G7,High income: OECD,1952,2204,867,771,750,782,683,661,4327,3867,15.42,5112,wc-201641
+42,Uzbekistan,29748859,15,2017,2016,Developing region,Lower middle income,52,44,3,2,58,48,4,4,59,49,20.97,103,wc-201642
+43,Venezuela,31304016,15,2017,2016,Emerging region: G20,Upper middle income,174,65,48,29,29,0,0,0,134,83,54.04,154,wc-201643
+44,South Africa,54841552,16,2017,2016,Emerging region: G20,Upper middle income,164,145,22,26,1,5,250,194,250,205,4.18,454,wc-201644
