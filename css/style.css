@@ -1,5 +1,12 @@
+body{
+    background-color: #0c7d92;
+}
+
+/*Style background data*/
+
 .countries {
-    stroke: #000;
+    fill: #a9a9a9;
+    stroke: #999;
     stroke-width: 0.5px;
     stroke-linecap: round;
 }
@@ -11,17 +18,114 @@
 }
 
 .gratBackground {
-    fill: #eef3ff;
+    fill: #0c7d92;
 }
+
+/*Style the info container elements*/
+#info{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 50px;
+    width: 50px;
+    margin: 20px;
+    background-color: rgba(128,128,128,.5);
+    border-style: solid;
+    border-width: 2px;
+    border-color: #80999999;
+}
+
+#Title{
+    font-size: 30px;
+    padding: 5px;
+    color: rgb(220,220,220,.9);
+    font-family: sans-serif;
+    font-weight: bold;
+    text-decoration: 
+}
+
+#About{
+    width: 400px;
+    font-size: 20px;
+    padding: 15px;
+    color: rgb(220,220,220,.9);
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+#unitContainer{
+    margin-top: 15px;
+    margin-left: 5px;
+    padding: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(220,220,220,.9); 
+    width: 310px;
+}
+.units{
+    padding: 0px;
+    margin: 0px;
+    font-size: 16px;
+    font-style: italic;
+}
+
+#Sources{
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    color: rgb(220,220,220,.9);
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#Sources a{
+    color: darkgray;
+}
+
+#instructionsContainer{
+    position: absolute;
+    top: 110px;
+    left: 436px;
+    color: rgb(220,220,220,.9);
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+
+#arrowImage{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 5px;
+}
+
+#arrow_x5F_full_x5F_up{
+
+    fill: rgb(220,220,220,.9);;
+}
+
+#instructionsText{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/*style map and chart conponents positions*/
 
 .map {
-    border: medium solid #999;
-    margin: 10px 0 0 20px;
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
 }
 
-
 .chart {
-    float: right;
+    position: absolute;
+    right: 5px;
     margin: 7px 20px 0 0;
 }
 
@@ -29,16 +133,17 @@
     font-family: sans-serif;
     font-size: 1.5em;
     font-weight: bold;
+    fill: rgb(220,220,220,.9);
 }
 
 .chartBackground {
-    fill: rgba(128,128,128,.2);
+    fill: rgba(128,128,128,.5);
 }
 
 .chartFrame {
     fill: none;
     stroke: #999;
-    stroke-width: 3px;
+    stroke-width: 1px;
     shape-rendering: crispEdges;
 }
 
@@ -52,14 +157,16 @@
 
 .axis text {
     font-family: sans-serif;
-    font-size: 0.8em;
+    font-size: 1.5em;
     fill: #999;
 }
 
+/*Style dropdown menu and hover labels*/
+
 .dropdown {
     position: absolute;
-    top: 30px;
-    left: 40px;
+    top: 85px;
+    left: 450px;
     z-index: 10;
     font-family: sans-serif;
     font-size: 1em;
@@ -67,36 +174,30 @@
     padding: 2px;
     border: 1px solid #999;
     box-shadow: 2px 2px 4px #999;
+    background-color: rgb(220,220,220,.9);
 }
 
 option {
     font-weight: normal;
 }
 
-.infolabel {
-    position: absolute;
-    height: 50px;
-    min-width: 100px;
-    color: #fff;
-    background-color: #000;
-    border: solid thin #fff;
-    padding: 5px 10px;
-}
 
 .infolabel h1 {
     margin: 0 20px 0 0;
     padding: 0;
     display: inline-block;
     line-height: 1em;
+    color: #EEE8AA;
 }
 
 .infolabel {
     position: absolute;
-    height: 50px;
+    height: 60px;
     min-width: 100px;
-    color: #fff;
-    background-color: #000;
-    border: solid thin #fff;
+    color: rgb(220,220,220);
+    background-color: rgba(128,128,128,.9);
+    border: solid thin rgb(220,220,220);
     padding: 5px 10px;
     top: -75px;
+    font-size: 20px;
 }

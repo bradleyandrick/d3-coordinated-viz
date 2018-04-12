@@ -1,36 +1,47 @@
 
-//First line of main.js...wrap everything in a self-executing anonymous function to move to local scope
+//self-executing anonymous function
 (function(){
 
-    //pseudo-global variables
-    var attrArray = ["Total Primary Production", "Total Primary Consumption", "Oil Products Production", "Oil Products Consumption", "Natural Gas Production", "Natural Gas Consumption", "Coal Production", "Coal Consumption", "Electricity Production", "Electricity Consumption"]; //list of attributes
-    var expressed = attrArray[0]; //initial attribute
+    // set up global level variables
+    
+    // set up array to use for legend and retreiving data values
+    var attrArray = ["Total Primary Production (Mtoe)", "Total Primary Consumption (Mtoe)", "Oil Products Production (Mt)", "Oil Products Consumption (Mt)", "Natural Gas Production (bcm)", "Natural Gas Consumption (bcm)", "Coal Production (Mt)", "Coal Consumption (Mt)", "Electricity Production (TWh)", "Electricity Consumption (TWh)"];
+    
+    // set default attribute
+    var expressed = attrArray[0]; 
+    
+    // get the height of the client to set the inital chart height 
+    var getHeight = document.documentElement.clientHeight -20;
+    var getHeightRange = getHeight - 10;
 
-     var chartWidth = window.innerWidth * 0.425,
-        chartHeight = 473,
-        leftPadding = 25,
+    // default chart settings
+     var chartWidth = window.innerWidth * 0.47,
+        chartHeight = getHeight,
+        leftPadding = 45,
         rightPadding = 2,
         topBottomPadding = 5,
         chartInnerWidth = chartWidth - leftPadding - rightPadding,
         chartInnerHeight = chartHeight - topBottomPadding * 2,
         translate = "translate(" + leftPadding + "," + topBottomPadding + ")";
     
-   
-    
-     //create a scale to size bars proportionally to frame
+    //create a scale to set bar height
     var yScale = d3.scaleLinear()
-        .range([463, 0])
-        .domain([0, 3000]);
+        .range([getHeightRange, 0])
+        .domain([0, 2538]);
     
     //begin script when window loads
     window.onload = setMap();
 
-    //set up choropleth map
+    //function to set up the map
     function setMap(){
 
-         //map frame dimensions
+        //map frame dimensions
         var width = window.innerWidth * 0.5,
         height = 460;
+        
+        // set the height and width of the info div
+        document.getElementById("info").style.width = window.innerWidth * 0.48 + "px";
+        document.getElementById("info").style.height = window.innerHeight - 490 + "px";
 
         //create new svg container for the map
         var map = d3.select("body")
@@ -39,85 +50,81 @@
             .attr("width", width)
             .attr("height", height);
 
-        //create Albers equal area conic projection centered on France
-        var projection = d3.geoAlbers()
-            .center([0, 46.2])
-            .rotate([-2, 0, 0])
-            .parallels([43, 62])
-            .scale(2500)
-            .translate([width / 2, height / 2]);
-
+        // set up the geoMollweide projection for showing the entire globe at once
         var projection = d3.geoMollweide() 
         .rotate([0, 0, 0])
             .translate([width / 2, height / 2])
-            .scale(150)
-            ;
+            .scale(150);
 
         var path = d3.geoPath()
             .projection(projection);
 
-
-
-        //use queue to parallelize asynchronous data loading
+        //use queue to asynchronously load the data
         d3.queue()
-            .defer(d3.csv, "data/CountryOnlyData.csv") //load attributes from csv
-            .defer(d3.json, "data/CountriesAllSimplified.topojson") //load choropleth spatial data
+            .defer(d3.csv, "data/CountryOnlyData.csv") //csv
+            .defer(d3.json, "data/CountriesAllSimplified.topojson") //data for baselayer with all countries
+            .defer(d3.json, "data/CountiresEnergy44Code.topojson") // data for spatial countries of interest
             .await(callback);
-
-        function callback(error, csvData, countries){
+        
+        // function to call after the data has been loaded
+        function callback(error, csvData, backgroundCountries, countries){
             
             //place graticule on the map
             setGraticule(map, path);
 
-            var backgroundCountries = topojson.feature(countries, countries.objects.CountriesEnergyAllCode);
+            // get the reference background Countries layer
+            var backgroundCountries = topojson.feature(backgroundCountries, backgroundCountries.objects.CountriesEnergyAllCode);
 
-            var worldCountries = topojson.feature(countries, countries.objects.CountriesEnergyAllCode).features;
+            // get the world countries to tie to csv data
+            var worldCountries = topojson.feature(countries, countries.objects.CountiresEnergy44Code).features;
             
+            // add the background Countries to the map
             var countriesAll = map.append("path")
                 .datum(backgroundCountries)
                 .attr("class", "countries")
                 .attr("d", path);
             
-            
+            // combine the spatial data and tabular data
             worldCountries = joinData(worldCountries, csvData);
             
+            // set the initial color scale
             var colorScale = makeColorScale(csvData);
 
-            //add enumeration units to the map
+            //call function to add enumeration units to the map
             setEnumerationUnits(worldCountries, map, path, colorScale);
 
-
+            // call function to add data to the chart
             setChart(csvData, colorScale);
             
+            // call function to setup the dropdown list
             createDropdown(csvData);
-            
-            //console.log(csvData);
-           // console.log(worldCountries);
+
         };
     };
     
-    
+    //function to set up graticule for map
     function setGraticule(map, path){
         var graticule = d3.geoGraticule()
-                .step([20, 20]); //place graticule lines every 5 degrees of longitude and latitude
+                .step([20, 20]); //place graticule lines every 20 degrees of longitude and latitude
 
         //create graticule background
         var gratBackground = map.append("path")
-            .datum(graticule.outline()) //bind graticule background
-            .attr("class", "gratBackground") //assign class for styling
-            .attr("d", path) //project graticule
+            .datum(graticule.outline()) 
+            .attr("class", "gratBackground") 
+            .attr("d", path) 
 
         //create graticule lines
-        var gratLines = map.selectAll(".gratLines") //select graticule elements that will be created
-            .data(graticule.lines()) //bind graticule lines to each element to be created
-            .enter() //create an element for each datum
-            .append("path") //append each element to the svg as a path element
-            .attr("class", "gratLines") //assign class for styling
-            .attr("d", path); //project graticule lines
+        var gratLines = map.selectAll(".gratLines") 
+            .data(graticule.lines()) 
+            .enter() 
+            .append("path") 
+            .attr("class", "gratLines") 
+            .attr("d", path); 
     };
 
+    // function to join data from spatial data and tabular data
     function joinData(worldCountries, csvData){
-        //loop through csv to assign each set of csv attribute values to geojson county
+        //loop through csv and combine on all values
         for (var i = 0; i<csvData.length; i++){
             var csvCountry = csvData[i];
             var csvKey = csvCountry.i_code;
@@ -137,6 +144,7 @@
         return worldCountries;
     };
     
+    // function to enumorate through countries and handle country style and events
     function setEnumerationUnits(worldCountries, map, path, colorScale){
         var countries = map.selectAll(".country")
             .data(worldCountries)
@@ -157,19 +165,20 @@
             })
             .on("mousemove", moveLabel);
         
-         var desc = countries.append("desc")
-        .text('{"stroke": "#000", "stroke-width": "0.5px"}');
+        // set desc to reset blank borders
+        var desc = countries.append("desc")
+            .text('{"stroke": "none", "stroke-width": "0px"}');
         
     };
     
     //function to create color scale generator
     function makeColorScale(data){
         var colorClasses = [
-            "#D4B9DA",
-            "#C994C7",
-            "#DF65B0",
-            "#DD1C77",
-            "#980043"
+            "#ffffcc",
+            "#c2e699",
+            "#78c679",
+            "#31a354",
+            "#006837"
         ];
 
         //create color scale generator
@@ -189,6 +198,7 @@
         domainArray = clusters.map(function(d){
             return d3.min(d);
         });
+        
         //remove first value from domain array to create class breakpoints
         domainArray.shift();
 
@@ -212,25 +222,21 @@
     
     //function to create coordinated bar chart
     function setChart(csvData, colorScale){
-        //chart frame dimensions
-       
-        
-        //Example 2.1 line 17...create a second svg element to hold the bar chart
+
+        //create svg element to hold chart
         var chart = d3.select("body")
             .append("svg")
             .attr("width", chartWidth)
             .attr("height", chartHeight)
             .attr("class", "chart");
-        
+        //add rectangle for background
         var chartBackground = chart.append("rect")
             .attr("class", "chartBackground")
             .attr("width", chartInnerWidth)
             .attr("height", chartInnerHeight)
             .attr("transform", translate);
         
-
-
-        //Example 2.4 line 8...set bars for each province
+        //setup bars based on country info
         var bars = chart.selectAll(".bars")
             .data(csvData)
             .enter()
@@ -246,16 +252,17 @@
             .on("mouseout", dehighlight)
             .on("mousemove", moveLabel);
         
+        // set desc to reset bar select after mouseout
         var desc = bars.append("desc")
         .text('{"stroke": "none", "stroke-width": "0px"}');
             
         
-         //create a text element for the chart title
+         //create chart title
         var chartTitle = chart.append("text")
-            .attr("x", 40)
+            .attr("x", chartWidth - 490)
             .attr("y", 40)
             .attr("class", "chartTitle")
-            .text(expressed + " in each Country");
+            .text(expressed);
         
         //create vertical axis generator
         var yAxis = d3.axisLeft()
@@ -274,6 +281,7 @@
             .attr("height", chartInnerHeight)
             .attr("transform", translate);
         
+        // call function to update the chart
         updateChart(bars, csvData.length, colorScale);
         
         
@@ -293,7 +301,7 @@
         var titleOption = dropdown.append("option")
             .attr("class", "titleOption")
             .attr("disabled", "true")
-            .text("Select Attribute");
+            .text("Select Metric");
 
         //add attribute name options
         var attrOptions = dropdown.selectAll("attrOptions")
@@ -319,6 +327,15 @@
             .style("fill", function(d){
                 return choropleth(d.properties, colorScale)
             });
+        //reset max value for chart
+         var max = d3.max(csvData, function(d){
+            return + parseFloat(d[expressed])
+        });
+        
+        //set reset yScale
+        yScale = d3.scaleLinear()
+            .range([chartHeight-10, 0])
+            .domain([0, max]);
         
         //re-sort, resize, and recolor bars
         var bars = d3.selectAll(".bar")
@@ -332,38 +349,58 @@
             })
             .duration(500);
             
+        // call function to update the chart
         updateChart(bars, csvData.length, colorScale);
         
     };
     
+    // function that updates the chart graphic and info
     function updateChart(bars, n, colorScale){
         //position bars
         bars.attr("x", function(d, i){
                 return i * (chartInnerWidth / n) + leftPadding;
             })
-            //size/resize bars
-            .attr("height", function(d, i){
-                return 463 - yScale(parseFloat(d[expressed]));
-            })
-            .attr("y", function(d, i){
-                return yScale(parseFloat(d[expressed])) + topBottomPadding;
-            })
-            //color/recolor bars
+            //resize bars
+            .attr("height", function(d){
+                var outHeight = (chartHeight-9) -  yScale(d[expressed]);
+                if (outHeight < 0) {
+                    return 0;
+                } else {
+                    return outHeight;
+                }})
+            .attr("y", function(d) {
+                var outY = yScale(d[expressed]) +5;
+                if (outY < 0) {
+                    return 0;
+                } else {
+                    return outY;
+                }})          
+            //recolor bars
             .style("fill", function(d){
                 return choropleth(d, colorScale);
             });
+        //set new chart title
         var chartTitle = d3.select(".chartTitle")
-        .text( expressed + " in each country");
+        .text( expressed);
+        
+        //update the chart axis
+        var yAxis = d3.axisLeft()
+            .scale(yScale);
+        
+        d3.selectAll("g.axis")
+        .call(yAxis);
     };
     
+    //function to hand highlighting of the data
     function highlight(props){
-        //change stroke
-        var selected = d3.selectAll("." + props.i_code)
-            .style("stroke", "blue")
-            .style("stroke-width", "2");
-        setLabel(props);
+            var selected = d3.selectAll("." + props.i_code)
+                .style("stroke", "#ff6166")
+                .style("stroke-width", "2");
+        //call function to set the label that shows on hover    
+        setLabel(props);  
     };
     
+    //function to drop highlight and reset the graphics
     function dehighlight(props){
         var selected = d3.selectAll("." + props.i_code)
             .style("stroke", function(){
@@ -386,8 +423,9 @@
         .remove();
     };
     
+    // function to set the label that is used on hover to identify attribute and feature
     function setLabel(props){
-        //label content
+       // add a label for content 
         var labelAttribute = "<h1>" + props[expressed] +
             "</h1><b>" + expressed + "</b>";
 
@@ -398,11 +436,12 @@
             .attr("id", props.i_code + "_label")
             .html(labelAttribute);
 
-        var regionName = infolabel.append("div")
+        var countryName = infolabel.append("div")
             .attr("class", "labelname")
-            .html(props.name);
+            .html(props.NAME);
     };
     
+    // function to locate the label as the user moves the map
     function moveLabel(){
        var labelWidth = d3.select(".infolabel")
             .node()
@@ -424,6 +463,5 @@
             .style("left", x + "px")
             .style("top", y + "px");
     };
-    
-    
-})(); //last line of main.js
+       
+})();

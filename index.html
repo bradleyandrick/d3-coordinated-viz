@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width">
-		<title>d3 Demo</title>
+		<title>d3 Lab 2</title>
 
 		<!--put your external stylesheet links here-->
 		<link rel="stylesheet" href="css/style.css">
@@ -13,24 +13,35 @@
 	</head>
 
 	<body>
-		<!--put your initial page content here-->
-			
-		<!--you can also use this space for internal scripts or stylesheets;
-		place these within <script> or <style> tags-->
+		<!--This is the DIV content for the information pane-->    
+        <div id="info">
+            <div id="Title">Exploring Energy Across The World</div>
+            <div id="About">
+                This is a data visualization to help a user gain insight into Energy Metrics from various countires.
+                <div id="unitContainer">
+                <p class="units">Mtoe = Million Tonnes of Oil Equivalent</p>
+                <p class="units">Mt = Megatonne </p>
+                <p class="units">bcm = Billion Cubic Metres</p>
+                <p class="units">TWh = Terawatt hours</p>
+                </div> 
+            </div>
+            <div id="Sources">Data sourced from Global Energy Statisical Yearbook. <a href="https://yearbook.enerdata.net" target="_blank">https://yearbook.enerdata.net/</a></div>
+            <div id="instructionsContainer">
+                <!--<div id="arrowImage"><img src="img/Arrow.png" alt="Up Arrow" style="width:50px;height:60px;"></div>-->
+                <div id="arrowImage">
+                    <svg enable-background="new 0 0 32 32" height="60px" width="60px" id="svg2" version="1.1" viewBox="0 0 32 32" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"><g id="background"><rect fill="none" height="32" width="32"/></g><g id="arrow_x5F_full_x5F_up"><polygon points="2,16 9.999,16 9.999,30 21.999,30 21.999,16 29.999,16 15.999,2  "/></g></svg>
+                </div>
+                <div id="instructionText">Change the dropdown to explore!</div>
+            </div>
+        </div>
 
-		<!--put your external script links here-->
-        
-        <!--<script type="text/javascript" src="lib/d3/d3.js"></script>
-        <script src="https://d3js.org/d3-queue.v3.min.js"></script>-->
-        
-        <script src="https://d3js.org/d3.v4.js"></script>
+		<!--script links here-->
+        <script src="lib/d3.v4.js"></script>
         <script src="lib/topojson/topojson.js"></script>
-        <script src="https://d3js.org/d3-array.v1.min.js"></script>
-        <script src="https://d3js.org/d3-geo.v1.min.js"></script>
-        <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
-        <script src="https://unpkg.com/simple-statistics@5.3.1/dist/simple-statistics.min.js"></script>
-        
-        
+        <script src="lib/d3-array.v1.min.js"></script>
+        <script src="lib/d3-geo.v1.min.js"></script>
+        <script src="lib/d3-geo-projection.v2.min.js"></script>
+        <script src="lib/simple-statistics.min.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>
